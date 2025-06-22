@@ -1,37 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
-    <link rel="stylesheet" href="styles/game.css">
-    <link rel="icon" href="images/pngegg.png">
+    <title>Game Kalkulator Jodoh</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Mengatur font default ke Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style untuk placeholder kustom */
+        .custom-placeholder::placeholder {
+            color: #d1d5db;
+        }
+    </style>
 </head>
-<body>
-    <form action="" method="post">
-    <div class="container">
-        <div class="header">
-        </div>
-        <div class="content">
-            <div class="game">
-                <h1 class="judul">Apakah dia jodohmu?</h1>
-                <div class="name-input">
-                    <input type="text" class="naama nama-satu" id="satu" placeholder="Your Name">
-                    <img src="images/red.png" alt="hati merah" class="red">
-                    <input type="text" class="naama nama-dua" placeholder="Your Crush Name">
+<body class="bg-pink-200">
+
+    <div class="container mx-auto flex items-center justify-center min-h-screen p-4">
+        <div class="w-full max-w-md bg-pink-300 shadow-2xl rounded-2xl p-6 md:p-8 text-center text-white">
+
+            <!-- Judul Game -->
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                Apakah dia jodohmu?
+            </h1>
+
+            <!-- Form Input -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-2 mb-6">
+                <input type="text" id="yourName" placeholder="Nama Kamu" class="w-full sm:w-1/2 text-center text-gray-700 bg-white rounded-full px-4 py-3 focus:outline-none focus:ring-4 focus:ring-pink-400 transition duration-300 custom-placeholder">
+                
+                <!-- Ikon Hati -->
+                <div class="text-pink-500 my-2 sm:my-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
                 </div>
-                <div class="buttons"><button class="button">JODOHKAN</button></div>
-                <H2>Hasil Akan Muncul Disini</H2>
-                <div class="box-hasil">
-                    <div class="hasil">
-                        <p class="text-hasil"></p>
-                    </div>
-                </div>
+
+                <input type="text" id="crushName" placeholder="Nama Dia" class="w-full sm:w-1/2 text-center text-gray-700 bg-white rounded-full px-4 py-3 focus:outline-none focus:ring-4 focus:ring-pink-400 transition duration-300 custom-placeholder">
+            </div>
+
+            <!-- Tombol Aksi -->
+            <button id="calculateBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out w-full sm:w-auto">
+                JODOHKAN
+            </button>
+
+            <!-- Area Hasil -->
+            <div id="result" class="mt-8 min-h-[100px] flex items-center justify-center">
+                <p class="text-lg text-gray-700 italic">Hasil akan muncul di sini...</p>
             </div>
         </div>
     </div>
-    <script src="js/game.js"></script>
-    </form>
+
+    <script>
+        // Mendapatkan elemen dari DOM
+        const yourNameInput = document.getElementById('yourName');
+        const crushNameInput = document.getElementById('crushName');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultDiv = document.getElementById('result');
+
+        // Menambahkan event listener ke tombol
+        calculateBtn.addEventListener('click', () => {
+            const name1 = yourNameInput.value.trim();
+            const name2 = crushNameInput.value.trim();
+
+            // Validasi input: memastikan kedua nama diisi
+            if (name1 === '' || name2 === '') {
+                resultDiv.innerHTML = `<p class="text-red-500 font-bold text-lg">Harap isi kedua nama terlebih dahulu!</p>`;
+                return; // Menghentikan eksekusi jika ada input yang kosong
+            }
+            
+            // Tampilkan animasi loading singkat
+            resultDiv.innerHTML = `<p class="text-gray-700 text-lg animate-pulse">Menghitung kecocokan...</p>`;
+
+            // Menunggu sejenak sebelum menampilkan hasil untuk efek dramatis
+            setTimeout(() => {
+                // Menghasilkan persentase acak antara 1 dan 100
+                const compatibility = Math.floor(Math.random() * 100) + 1;
+                
+                let message = '';
+                let textColor = 'text-gray-800';
+
+                // Memberikan pesan berbeda berdasarkan persentase
+                if (compatibility < 30) {
+                    message = `Sepertinya lebih cocok jadi teman saja.`;
+                    textColor = 'text-red-600';
+                } else if (compatibility < 60) {
+                    message = `Ada potensi, butuh sedikit usaha lagi! 😉`;
+                    textColor = 'text-yellow-600';
+                } else if (compatibility < 85) {
+                    message = `Wah, sepertinya kalian cukup serasi! 🥰`;
+                    textColor = 'text-green-600';
+                } else {
+                    message = `SELAMAT! Kalian adalah pasangan yang sangat cocok! ❤️`;
+                    textColor = 'text-pink-600';
+                }
+
+                // Menampilkan hasil ke layar
+                resultDiv.innerHTML = `
+                    <div class="text-center transition-opacity duration-500">
+                        <p class="text-lg font-semibold text-gray-700">Kecocokan antara ${name1} dan ${name2} adalah:</p>
+                        <p class="text-6xl font-black ${textColor} my-2">${compatibility}%</p>
+                        <p class="text-md font-medium text-gray-800">${message}</p>
+                    </div>
+                `;
+            }, 1000); // Penundaan selama 1 detik (1000 milidetik)
+        });
+    </script>
+
 </body>
 </html>
