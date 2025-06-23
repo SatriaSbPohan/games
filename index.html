@@ -13,19 +13,51 @@
     <style>
         /* Mengatur font default ke Inter */
         body {
+            background-image: url("images/Satria Pohan.png");
+            background-size: cover;
             font-family: 'Inter', sans-serif;
         }
         /* Style untuk placeholder kustom */
         .custom-placeholder::placeholder {
             color: #d1d5db;
+        
+        }
+        .logo {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 100px;
+        }
+        .gambarloading {
+            width: 100px;
+            height: 100px;
+        }
+        .nangis {
+            width: 100px;
+            height: 100px;
+        }
+        /* .latar {
+            background-image: url(images/Notetrans.png);
+            background-size: cover;
+            background-position: center;
+            overflow: visible;
+        } */
+        @media only screen and (max-width: 600px) {
+        .logo {
+        width: 100px;
+        height: 50px;
+        top: 5%;
+        }
         }
     </style>
 </head>
-<body class="bg-pink-200">
+<body class="bg-red-800">
 
     <div class="container mx-auto flex items-center justify-center min-h-screen p-4">
-        <div class="w-full max-w-md bg-pink-300 shadow-2xl rounded-2xl p-6 md:p-8 text-center text-white">
-
+        <img src="images/logo.png" alt="" class="logo mx-auto flex">
+        <div class="w-full max-w-md bg-pink-300 shadow-2xl rounded-2xl p-6 md:p-8 text-center text-white latar">
             <!-- Judul Game -->
             <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
                 Apakah dia jodohmu?
@@ -51,8 +83,10 @@
             </button>
 
             <!-- Area Hasil -->
-            <div id="result" class="mt-8 min-h-[100px] flex items-center justify-center">
+            <div id="result" class="mt-4 min-h-[50px] flex items-center justify-center">
                 <p class="text-lg text-gray-700 italic">Hasil akan muncul di sini...</p>
+            </div><div id="result2" class="flex items-center justify-center">
+                
             </div>
         </div>
     </div>
@@ -63,6 +97,7 @@
         const crushNameInput = document.getElementById('crushName');
         const calculateBtn = document.getElementById('calculateBtn');
         const resultDiv = document.getElementById('result');
+        const resultDiv2 = document.getElementById('result2');
 
         // Menambahkan event listener ke tombol
         calculateBtn.addEventListener('click', () => {
@@ -77,6 +112,7 @@
             
             // Tampilkan animasi loading singkat
             resultDiv.innerHTML = `<p class="text-gray-700 text-lg animate-pulse">Menghitung kecocokan...</p>`;
+            resultDiv2.innerHTML = `<img src="images/nervous.gif" class="gambarloading">`;
 
             // Menunggu sejenak sebelum menampilkan hasil untuk efek dramatis
             setTimeout(() => {
@@ -85,20 +121,26 @@
                 
                 let message = '';
                 let textColor = 'text-gray-800';
+                let gambar = '';
 
                 // Memberikan pesan berbeda berdasarkan persentase
                 if (compatibility < 30) {
                     message = `Sepertinya lebih cocok jadi teman saja.`;
                     textColor = 'text-red-600';
+                    gambar = 'images/nangis.gif';
                 } else if (compatibility < 60) {
                     message = `Ada potensi, butuh sedikit usaha lagi! 😉`;
                     textColor = 'text-yellow-600';
+                    gambar = 'images/awkward.gif';
                 } else if (compatibility < 85) {
                     message = `Wah, sepertinya kalian cukup serasi! 🥰`;
                     textColor = 'text-green-600';
+                    gambar = 'images/senyum.gif';
+                    
                 } else {
                     message = `SELAMAT! Kalian adalah pasangan yang sangat cocok! ❤️`;
                     textColor = 'text-pink-600';
+                    gambar = 'images/lego.gif';
                 }
 
                 // Menampilkan hasil ke layar
@@ -106,12 +148,14 @@
                     <div class="text-center transition-opacity duration-500">
                         <p class="text-lg font-semibold text-gray-700">Kecocokan antara ${name1} dan ${name2} adalah:</p>
                         <p class="text-6xl font-black ${textColor} my-2">${compatibility}%</p>
-                        <p class="text-md font-medium text-gray-800">${message}</p>
+                        <center><img class="nangis" src="${gambar}"></center>
+                        <p class="text-md font-medium text-gray-800">${message}</p></br>
+                        <input type="button" value="Coba Lagi" onClick="window.location.reload()" class="bg-red-100 hover:bg-red-150 text-black font-bold py-3 px-8 rounded shadow-lg transform hover:scale-105 transition duration-300 ease-in-out w-full sm:w-auto">
                     </div>
                 `;
-            }, 1000); // Penundaan selama 1 detik (1000 milidetik)
+                resultDiv2.innerHTML = ``;
+            }, 3000); // Penundaan selama 1 detik (1000 milidetik)
         });
     </script>
-
 </body>
-</html>
+</html
