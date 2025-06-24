@@ -31,8 +31,8 @@
             height: 50px;
         }
         .gambarloading {
-            width: 100px;
-            height: 100px;
+            width: 50px;
+            height: 50px;
         }
         .nangis {
             width: 100px;
@@ -69,7 +69,7 @@
                 <input type="text" id="yourName" placeholder="Nama Kamu" class="w-full sm:w-1/2 text-center text-gray-700 bg-white rounded-full px-4 py-3 focus:outline-none focus:ring-4 focus:ring-pink-400 transition duration-300 custom-placeholder">
                 
                 <!-- Ikon Hati -->
-                <div class="text-pink-500 my-2 sm:my-0">
+                <div class="text-pink-500 my-2 sm:my-0 animate-pulse">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                     </svg>
@@ -86,8 +86,8 @@
             <!-- Area Hasil -->
             <div id="result" class="mt-4 min-h-[50px] flex items-center justify-center">
                 <p class="text-lg text-gray-700 italic">Hasil akan muncul di sini...</p>
-            </div><div id="result2" class="flex items-center justify-center">
-                
+            </div>
+            <div id="result2" class="flex items-center justify-center">
             </div>
         </div>
     </div>
@@ -99,6 +99,7 @@
         const calculateBtn = document.getElementById('calculateBtn');
         const resultDiv = document.getElementById('result');
         const resultDiv2 = document.getElementById('result2');
+        // const finput = document.getElementsById('finput');
         let audio = new Audio('Audio/One.mp3');
         
         // Menambahkan event listener ke tombol
@@ -114,8 +115,9 @@
             }
             
             // Tampilkan animasi loading singkat
+            // finput.innerHTML = '';
             resultDiv.innerHTML = `<p class="text-gray-700 text-lg animate-pulse">Menghitung kecocokan...</p>`;
-            resultDiv2.innerHTML = `<img src="images/nervous.gif" class="gambarloading">`;
+            resultDiv2.innerHTML = `<img src="images/loading.png" class="gambarloading animate-spin">`;
 
             // Menunggu sejenak sebelum menampilkan hasil untuk efek dramatis
             setTimeout(() => {
