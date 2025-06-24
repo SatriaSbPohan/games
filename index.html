@@ -101,9 +101,11 @@
         const resultDiv2 = document.getElementById('result2');
         // const finput = document.getElementsById('finput');
         let audio = new Audio('Audio/One.mp3');
+        let click = new Audio('Audio/click.mp3');
         
         // Menambahkan event listener ke tombol
         calculateBtn.addEventListener('click', () => {
+            click.play();
             audio.pause();
             const name1 = yourNameInput.value.trim();
             const name2 = crushNameInput.value.trim();
@@ -117,7 +119,7 @@
             // Tampilkan animasi loading singkat
             // finput.innerHTML = '';
             resultDiv.innerHTML = `<p class="text-gray-700 text-lg animate-pulse">Menghitung kecocokan...</p>`;
-            resultDiv2.innerHTML = `<img src="images/Loading.png" class="gambarloading animate-spin">`;
+            resultDiv2.innerHTML = `<img src="images/loading.png" class="gambarloading animate-spin">`;
 
             // Menunggu sejenak sebelum menampilkan hasil untuk efek dramatis
             setTimeout(() => {
