@@ -99,9 +99,11 @@
         const calculateBtn = document.getElementById('calculateBtn');
         const resultDiv = document.getElementById('result');
         const resultDiv2 = document.getElementById('result2');
-
+        let audio = new Audio('Audio/One.mp3');
+        
         // Menambahkan event listener ke tombol
         calculateBtn.addEventListener('click', () => {
+            audio.pause();
             const name1 = yourNameInput.value.trim();
             const name2 = crushNameInput.value.trim();
 
@@ -123,25 +125,32 @@
                 let message = '';
                 let textColor = 'text-gray-800';
                 let gambar = '';
+                
 
                 // Memberikan pesan berbeda berdasarkan persentase
                 if (compatibility < 30) {
                     message = `Sepertinya lebih cocok jadi teman saja.`;
                     textColor = 'text-red-600';
-                    gambar = 'images/nangis.gif';
+                    gambar = 'images/Laugh.png';
+                    audio = new Audio('Audio/Three.mp3');
+                    
                 } else if (compatibility < 60) {
                     message = `Ada potensi, butuh sedikit usaha lagi! 😉`;
                     textColor = 'text-yellow-600';
-                    gambar = 'images/awkward.gif';
+                    gambar = 'images/nangis.gif';
+                    audio = new Audio('Audio/Four.mp3');
+                    
                 } else if (compatibility < 85) {
                     message = `Wah, sepertinya kalian cukup serasi! 🥰`;
                     textColor = 'text-green-600';
                     gambar = 'images/senyum.gif';
+                    audio = new Audio('Audio/Two.mp3');
                     
                 } else {
                     message = `SELAMAT! Kalian adalah pasangan yang sangat cocok! ❤️`;
                     textColor = 'text-pink-600';
                     gambar = 'images/lego.gif';
+                    audio = new Audio('Audio/One.mp3');
                 }
 
                 // Menampilkan hasil ke layar
@@ -155,6 +164,7 @@
                     </div>
                 `;
                 resultDiv2.innerHTML = ``;
+                audio.play();
             }, 3000); // Penundaan selama 1 detik (1000 milidetik)
         });
     </script>
